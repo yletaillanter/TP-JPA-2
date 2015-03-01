@@ -48,6 +48,7 @@ public class JpaTest {
 		// CREATE ENTITY
 		Person yoann = new Person("Le Taillanter","Yoann",Gender.male,new Date());
 		Person faustine = new Person("Beaumont","Faustine",Gender.female,new Date());
+		Person faustineBol = new Person("Bollaert","Faustine",Gender.female,new Date());
 		
 		yoann.setFriends(new ArrayList<Person>(Arrays.asList(faustine)));
 		
@@ -75,6 +76,7 @@ public class JpaTest {
 		yoannHome.setDevices(new ArrayList<SmartDevice>(Arrays.asList(chauffage)));
 		
 		// PERSIST ENTITY
+		manager.persist(faustineBol);		
 		manager.persist(yoannHome);
 		manager.persist(yoannHome2);
 		manager.persist(faustineHome1);
