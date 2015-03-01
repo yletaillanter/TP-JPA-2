@@ -1,5 +1,8 @@
 package fr.istic.tpjpa.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -7,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Home {
@@ -15,6 +19,10 @@ public class Home {
 	private float area;
 	private String ip;
 	private Person owner;
+	
+	private List<Device> devices;
+	
+	
 	
 	public Home(){
 		
@@ -25,6 +33,7 @@ public class Home {
 		this.area = area;
 		this.ip = ip;
 		this.owner = owner;
+		this.devices = new ArrayList<Device>();
 	}
 
 	@Id
@@ -71,4 +80,13 @@ public class Home {
 		this.owner = owner;
 	}
 
+	@OneToMany(mappedBy = "home", cascade = CascadeType.PERSIST)
+	public List<Device> getDevices() {
+		return devices;
+	}
+
+	public void setDevices(List<Device> devices) {
+		this.devices = devices;
+	}
+	
 }
