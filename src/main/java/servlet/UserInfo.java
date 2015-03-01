@@ -3,6 +3,10 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +17,20 @@ import javax.servlet.http.HttpServletResponse;
 urlPatterns={"/UserInfo"})
 public class UserInfo extends HttpServlet {
 	
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private EntityManagerFactory factory;
+    private EntityManager manager;
+    private EntityTransaction tx;
+    private PrintWriter pw;
+
+    @Override
+    public void init() throws ServletException {
+       factory = Persistence.createEntityManagerFactory("exemple");
+       manager = factory.createEntityManager();
+       tx = manager.getTransaction();
+    }
+
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 
 		PrintWriter out = response.getWriter();
@@ -32,5 +49,4 @@ public class UserInfo extends HttpServlet {
 				"</BODY></HTML>"
 		);
 	}
-
 }
