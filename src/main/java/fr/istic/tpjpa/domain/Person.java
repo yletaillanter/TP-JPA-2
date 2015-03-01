@@ -37,7 +37,7 @@ public class Person {
 		this.name = name;
 		this.firstName = firstName;
 		this.gender = gender;
-		this.email = name + firstName + "opower.com";
+		this.email = name + firstName + "@opower.com";
 		this.birthDate = birthdate;
 		this.facebookProfil = name + firstName;
 		

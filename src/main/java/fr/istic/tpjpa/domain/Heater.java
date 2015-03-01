@@ -5,6 +5,6 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("Heater")
-public class Heater extends Device {
+public class Heater extends SmartDevice {
 
 }

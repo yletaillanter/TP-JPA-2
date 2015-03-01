@@ -20,7 +20,7 @@ public class Home {
 	private String ip;
 	private Person owner;
 	
-	private List<Device> devices;
+	private List<SmartDevice> devices;
 	
 	
 	
@@ -33,7 +33,7 @@ public class Home {
 		this.area = area;
 		this.ip = ip;
 		this.owner = owner;
-		this.devices = new ArrayList<Device>();
+		this.devices = new ArrayList<SmartDevice>();
 	}
 
 	@Id
@@ -81,11 +81,11 @@ public class Home {
 	}
 
 	@OneToMany(mappedBy = "home", cascade = CascadeType.PERSIST)
-	public List<Device> getDevices() {
+	public List<SmartDevice> getDevices() {
 		return devices;
 	}
 
-	public void setDevices(List<Device> devices) {
+	public void setDevices(List<SmartDevice> devices) {
 		this.devices = devices;
 	}
 	
