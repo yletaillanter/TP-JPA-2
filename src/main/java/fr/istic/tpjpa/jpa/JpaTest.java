@@ -38,8 +38,8 @@ public class JpaTest {
 		tx.begin();
 		
 		// CREATE ENTITY
-		Person yoann = new Person("Yoann","LeTaillanter",Gender.male,new Date());
-		Person faustine = new Person("Faustine","Beaumont",Gender.female,new Date());
+		Person yoann = new Person("Le Taillanter","Yoann",Gender.male,new Date());
+		Person faustine = new Person("Beaumont","Faustine",Gender.female,new Date());
 		
 		yoann.setFriends(new ArrayList<Person>(Arrays.asList(faustine)));
 		
@@ -73,9 +73,26 @@ public class JpaTest {
 		
 		tx.commit();
 
-		// TODO run request
+		// RUN REQUEST
+		test.listPerson();	
+		test.listHome();
 
 		System.out.println(".. done");
 	}
-
+	
+	private void listPerson(){
+		List<Person> resultList = manager.createQuery("Select a From Person a", Person.class).getResultList();
+		System.out.println("Nombre de Personnes dans la base = " + resultList.size());
+		for(Person next : resultList ){
+			System.out.println("next person: " + next.toString());
+		}
+	}
+	
+	private void listHome(){
+		List<Home> resultList = manager.createQuery("Select a From Home a", Home.class).getResultList();
+		System.out.println("Nombre de Maisons dans la base = " + resultList.size());
+		for(Home next : resultList ){
+			System.out.println("next maison: " + next.toString());
+		}
+	}
 }

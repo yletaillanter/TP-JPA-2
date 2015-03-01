@@ -89,4 +89,12 @@ public class Home {
 		this.devices = devices;
 	}
 	
+	@Override
+	public String toString(){
+		return address.getNumber()
+				+" "+address.getStreet()
+			    +" "+address.getZipCode()
+			    +" "+address.getCity();
+	}
+	
 }

@@ -126,4 +126,9 @@ public class Person {
 		this.friends = friends;
 	}
 	
+	@Override
+	public String toString(){
+		return firstName +" "+ name;
+	}
+	
 }
