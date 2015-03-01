@@ -71,15 +71,16 @@ public class JpaTest {
 		manager.persist(yoannHome2);
 		manager.persist(faustineHome1);
 		
+		manager.persist(yoann);
 		tx.commit();
 
 		// RUN REQUEST
-		test.listPerson();	
-		test.listHome();
+		//test.listPerson();	
+		//test.listHome();
 
 		System.out.println(".. done");
 	}
-	
+	/*
 	private void listPerson(){
 		List<Person> resultList = manager.createQuery("Select a From Person a", Person.class).getResultList();
 		System.out.println("Nombre de Personnes dans la base = " + resultList.size());
@@ -95,4 +96,5 @@ public class JpaTest {
 			System.out.println("next maison: " + next.toString());
 		}
 	}
+	*/
 }
