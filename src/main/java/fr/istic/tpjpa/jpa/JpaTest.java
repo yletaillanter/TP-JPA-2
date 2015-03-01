@@ -11,7 +11,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import fr.istic.tpjpa.domain.Device;
 import fr.istic.tpjpa.domain.Gender;
+import fr.istic.tpjpa.domain.Heater;
 import fr.istic.tpjpa.domain.Person;
 import fr.istic.tpjpa.domain.Address;
 import fr.istic.tpjpa.domain.Home;
@@ -58,6 +60,11 @@ public class JpaTest {
 				100,
 				"172.168.100.0",
 				faustine);
+		
+		Device chauffage = new Heater();
+		chauffage.setConso(1000);
+		chauffage.setHome(yoannHome);
+		yoannHome.setDevices(new ArrayList<Device>(Arrays.asList(chauffage)));
 		
 		// PERSIST ENTITY
 		manager.persist(yoannHome);
