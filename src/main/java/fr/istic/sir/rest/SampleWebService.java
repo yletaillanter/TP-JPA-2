@@ -52,14 +52,46 @@ public class SampleWebService {
     	EntityManagerFactory factory = Persistence.createEntityManagerFactory("example");
         EntityManager manager = factory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
-    	tx.begin();
         
+    	tx.begin();
     	Query query = manager.createQuery("select a from Person a where id = :id");
         query.setParameter("id", idPerson);
         List<Person> results = query.getResultList();
-        
         tx.commit();
+
         return results.get(0);
+    }
+    
+    @GET
+    @Path("/HomeByOwner/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Home> getHomeByOwner(@PathParam("id") Long idPerson){
+    	EntityManagerFactory factory = Persistence.createEntityManagerFactory("example");
+        EntityManager manager = factory.createEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        
+    	tx.begin();
+    	Query query = manager.createQuery("select a from Home a where OWNER_ID = :id");
+        query.setParameter("id", idPerson);
+        List<Home> results = query.getResultList();
+        tx.commit();
+
+        return results;
+    }
+    
+    @GET
+    @Path("/Homes")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Home> getHomes(){
+    	EntityManagerFactory factory = Persistence.createEntityManagerFactory("example");
+        EntityManager manager = factory.createEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        
+    	tx.begin();
+    	Query query = manager.createQuery("select a from Home a");
+        tx.commit();
+
+        return query.getResultList();
     }
     
 }
