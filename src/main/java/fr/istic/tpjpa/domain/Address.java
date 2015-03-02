@@ -1,9 +1,11 @@
 package fr.istic.tpjpa.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Address {
+public class Address implements Serializable {
 	private int number;
 	private String street;
 	private int zipCode;

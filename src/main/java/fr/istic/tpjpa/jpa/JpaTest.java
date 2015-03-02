@@ -48,7 +48,11 @@ public class JpaTest {
 		// CREATE ENTITY
 		Person yoann = new Person("Le Taillanter","Yoann",Gender.male,new Date());
 		Person faustine = new Person("Beaumont","Faustine",Gender.female,new Date());
-		Person faustineBol = new Person("Bollaert","Faustine",Gender.female,new Date());
+		Person person1 = new Person("Forrest","Fry",Gender.male,new Date());
+		Person person2 = new Person("Sebastian","Hahn",Gender.male,new Date());
+		Person person3 = new Person("Todd","Baird",Gender.male,new Date());
+		Person person4 = new Person("Beck","Aguirre",Gender.female,new Date());
+		Person person5 = new Person("Herrod","Mueller",Gender.female,new Date());
 		
 		yoann.setFriends(new ArrayList<Person>(Arrays.asList(faustine)));
 		
@@ -76,10 +80,14 @@ public class JpaTest {
 		yoannHome.setDevices(new ArrayList<SmartDevice>(Arrays.asList(chauffage)));
 		
 		// PERSIST ENTITY
-		manager.persist(faustineBol);		
 		manager.persist(yoannHome);
 		manager.persist(yoannHome2);
 		manager.persist(faustineHome1);
+		manager.persist(person1);
+		manager.persist(person2);
+		manager.persist(person3);
+		manager.persist(person4);
+		manager.persist(person5);
 		
 		manager.persist(yoann);
 		tx.commit();
@@ -94,7 +102,7 @@ public class JpaTest {
 	}
 	
 	private void listPerson(){
-		List<Person> resultList = manager.createQuery("Select a From Person a", Person.class).getResultList();
+    	List<Person> resultList = manager.createQuery("Select a From Person a", Person.class).getResultList();
 		System.out.println("Nombre de Personnes dans la base = " + resultList.size());
 		for(Person next : resultList ){
 			System.out.println("next person: " + next.toString());
@@ -125,5 +133,7 @@ public class JpaTest {
 		  System.out.println(t.get("name"));
 		}
 	}
+	
+	
 	
 }

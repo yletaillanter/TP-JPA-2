@@ -1,5 +1,6 @@
 package fr.istic.tpjpa.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
 @Entity
-public class Home {
+public class Home implements Serializable {
 	private Long id;
 	private Address address;
 	private float area;
@@ -21,8 +25,6 @@ public class Home {
 	private Person owner;
 	
 	private List<SmartDevice> devices;
-	
-	
 	
 	public Home(){
 		
@@ -72,6 +74,7 @@ public class Home {
 	}
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JsonBackReference
 	public Person getOwner() {
 		return owner;
 	}
@@ -81,6 +84,7 @@ public class Home {
 	}
 
 	@OneToMany(mappedBy = "home", cascade = CascadeType.PERSIST)
+	@JsonManagedReference
 	public List<SmartDevice> getDevices() {
 		return devices;
 	}

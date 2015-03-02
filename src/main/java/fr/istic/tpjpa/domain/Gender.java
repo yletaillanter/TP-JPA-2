@@ -1,6 +1,8 @@
 package fr.istic.tpjpa.domain;
 
-public enum Gender {
+import java.io.Serializable;
+
+public enum Gender implements Serializable {
 	female,
 	male;
 }

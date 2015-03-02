@@ -1,5 +1,6 @@
 package fr.istic.tpjpa.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,8 +18,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
 @Entity
-public class Person {
+public class Person implements Serializable {
 	private Long id;
 	private String name;
 	private String firstName;
@@ -106,6 +109,7 @@ public class Person {
 	}
 
 	@OneToMany( mappedBy = "owner", cascade = CascadeType.PERSIST)
+	@JsonManagedReference
 	public List<Home> getHomes() {
 		return homes;
 	}
@@ -115,9 +119,8 @@ public class Person {
 	}
 
 	@ManyToMany
-	@JoinTable(
-			name="Friends"
-	)
+	@JoinTable(name="Friends")
+	@JsonManagedReference
 	public List<Person> getFriends() {
 		return friends;
 	}
