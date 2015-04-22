@@ -57,13 +57,13 @@ public class JpaTest {
 		yoann.setFriends(new ArrayList<Person>(Arrays.asList(faustine)));
 		
 		Home yoannHome = new Home(
-				new Address(1,"rue Jean Brulelou", 35700, "Rennes"),
+				new Address(1,"rue des peupliers", 35700, "Rennes"),
 				100,
 				"192.168.0.10",
 				yoann);
 		
 		Home yoannHome2 = new Home(
-				new Address(2,"rue du Gué renard", 41250, "Bracieux"),
+				new Address(2,"Avenue du General Leclerc", 35000, "Rennes"),
 				100,
 				"127.0.0.0",
 				yoann);
