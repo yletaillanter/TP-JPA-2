@@ -1,26 +1,27 @@
 package servlet;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
+import fr.istic.tpjpa.domain.Address;
+import fr.istic.tpjpa.domain.Home;
+import fr.istic.tpjpa.domain.Person;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.istic.tpjpa.domain.Home;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-@WebServlet(name="homes",
-urlPatterns={"/Homes"})
-public class Homes extends HttpServlet {
-	
+
+/**
+ * Created by 14007427 on 28/01/2015.
+ */
+@WebServlet(name="addhome",
+urlPatterns={"/AddHome"})
+public class AddHome extends HttpServlet {
+
     private EntityManagerFactory factory;
     private EntityManager manager;
     private EntityTransaction tx;
@@ -28,41 +29,44 @@ public class Homes extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-       factory = Persistence.createEntityManagerFactory("example");
-       manager = factory.createEntityManager();
-       tx = manager.getTransaction();
+        factory = Persistence.createEntityManagerFactory("example");
+        manager = factory.createEntityManager();
+        tx = manager.getTransaction();
     }
-    
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+
         pw = resp.getWriter();
         tx.begin();
-
-        Query query = manager.createQuery("select a from Home a");
-
-        List<Home> resultList = query.getResultList();
-
-        pw.println(header);
-        for(Home home : resultList){
-        	pw.println("<tr>");
-        	pw.println("<td>"+home.getId()+"</td>");
-        	pw.println("<td>"+home.getAddress().toString()+"</td>");
-        	pw.println("<td>"+home.getArea()+"</td>");
-        	pw.println("<td>"+home.getIp()+"</td>");
-        	pw.println("<td>"+home.getOwner()+"</td>");
-        	pw.println("</tr>");
-        }
-        pw.println(footer);
-        tx.commit();
         
+        //On récupère l'id de la personne passé en paramétre.
+        TypedQuery<Person> query = manager.createQuery("SELECT a FROM Person a WHERE a.id=:ipProp", Person.class);
+        Person proprio = query.setParameter("ipProp", Long.parseLong(req.getParameter("ipProp"))).getSingleResult();
+        
+        
+		Home home = new Home(
+				new Address(Integer.parseInt(req.getParameter("num")),req.getParameter("address"), Integer.parseInt(req.getParameter("cp")), req.getParameter("ville")),
+				Float.parseFloat(req.getParameter("area")),
+				req.getParameter("ip"),
+				proprio
+		);
+
+        manager.persist(home);
+        
+        
+        pw.println(header);
+        pw.println("<script>");  
+        pw.println("alert('Home added')");  // "+req.getParameter("firstName")+" "+req.getParameter("lastName"));  
+        pw.println("window.location = 'http://localhost:8080/Homes'");
+        pw.println("</script>");
+        pw.println(footer);
+        
+        tx.commit();
     }
     
-    @Override
-    public void destroy() {
-        manager.close();
-    }
-    
- // PAGE HTML
+    // PAGE HTML
     String header = "<!doctype html>"
 		+"<html class='no-js' lang='en'>"
 		+"<head>"
@@ -94,23 +98,18 @@ public class Homes extends HttpServlet {
 		        +"<a href='#'>Maisons</a>"
 		        +"<ul class='dropdown'>"
 		          +"<li class='active'><a href='http://localhost:8080/Homes'>Voir les maisons</a></li>"
-		          +"<li><a href='http://localhost:8080/ajoutmaison.html'>Ajouter une maison</a></li>"
+		          +"<li><a href='#'>Ajouter une maison</a></li>"
 		        +"</ul>"
 		      +"</li>"
 		    +"</ul>"
 		    +"</section>"
-			+"</nav>"	
-		    +"<table><thead><tr> <th>ID</th> <th>Adresse</th> <th >Area</th> <th>@IP</th> <th >Owner</th>  </tr></thead><tbody>";
+			+"</nav>";
     
-    String footer = "</tbody> </thead> </table>"
-    			    
-		    +"<script src='foundation-5/js/vendor/jquery.js'></script>"
+    String footer ="<script src='foundation-5/js/vendor/jquery.js'></script>"
 		    +"<script src='foundation-5/js/foundation.min.js'></script>"
 		    +"<script>"
 		      +"$(document).foundation();"
 		    +"</script>"
 		  +"</body>"
 		+"</html>";
-    
-    
 }

@@ -37,7 +37,7 @@ public class Users extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         pw = resp.getWriter();
         tx.begin();
-        //create();
+
         Query query = manager.createQuery("select a from Person a");
 
         List<Person> resultList = query.getResultList();
@@ -94,7 +94,7 @@ public class Users extends HttpServlet {
 		        +"<a href='#'>Maisons</a>"
 		        +"<ul class='dropdown'>"
 		          +"<li><a href='http://localhost:8080/Homes'>Voir les maisons</a></li>"
-		          +"<li><a href='#'>Ajouter une maison</a></li>"
+		          +"<li><a href='http://localhost:8080/ajoutmaison.html'>Ajouter une maison</a></li>"
 		        +"</ul>"
 		      +"</li>"
 		    +"</ul>"

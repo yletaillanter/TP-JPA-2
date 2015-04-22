@@ -45,4 +45,9 @@ public class Address implements Serializable {
 		this.city = city;
 	}
 	
+	@Override
+	public String toString(){
+		return this.getNumber() +' '+ this.getStreet() + ' ' + this.getZipCode() + ' ' + this.getCity();
+	}
+	
 }

@@ -20,18 +20,18 @@
     <!-- Left Nav Section -->
     <ul class="left">
       <li><a href="http://localhost:8080/">Accueil</a></li>
-      <li class="has-dropdown active">
+      <li class="has-dropdown">
         <a href="#">Personnes</a>
         <ul class="dropdown">
           <li><a href="http://localhost:8080/Users">Voir les personnes</a></li>
-          <li  class="active"><a href="http://localhost:8080/ajoutperson.html">Ajouter une personne</a></li>
+          <li  ><a href="http://localhost:8080/ajoutperson.html">Ajouter une personne</a></li>
         </ul>
       </li>
-      <li class="has-dropdown">
+      <li class="has-dropdown active">
         <a href="#">Maisons</a>
         <ul class="dropdown">
           <li><a href="http://localhost:8080/Homes">Voir les maisons</a></li>
-          <li><a href="http://localhost:8080/ajoutmaison.html">Ajouter une maison</a></li>
+          <li class="active"><a href="http://localhost:8080/ajoutmaison.html">Ajouter une maison</a></li>
         </ul>
       </li>
     </ul>
@@ -39,46 +39,61 @@
 </nav>
     
     <!-- Formulaire ajout d'une personne -->
-    <form method="POST" Action="/AddPerson">
+    <form method="POST" Action="/AddHome">
     <div class="row">
-      <div class="large-12 columns">
-      	<label>First name:
-      		 <input type=text placeholder="First name" size=20 name=firstName>
+      <div class="large-2 columns">
+      	<label>Numéro:
+      		 <input type=text placeholder="ex : 1" size=4 name=num>
       	</label>
       </div>
-    </div>
-    <div class="row">
-      <div class="large-12 columns">
-      	<label>Last name:
-      		 <input type=text placeholder="Last name" size=20 name=lastName>
-      	</label>
-      </div>
-    </div>
       
-    <div class="row">
-      <div class="large-12 columns">
-      	<label>Email :
-      		 <input type=text placeholder="email" size=20 name=email>
+      <div class="large-10 columns">
+      	<label>Adresse:
+      		 <input type=text placeholder="ex : rue des peupliers" size=20 name=address>
       	</label>
       </div>
     </div>
     
     <div class="row">
-	    <div class="large-12 columns">
-	      <label>Gender</label>
-	      <input type="radio" name="gender" value="M"><label>Male</label>
-	      <input type="radio" name="gender" value="F"><label>Female</label>
-	    </div>
+      <div class="large-6 columns">
+      	<label>Code Postal:
+      		 <input type=text placeholder="ex : 35700" size=20 name=cp>
+      	</label>
+      </div>
+      <div class="large-6 columns">
+      	<label>Ville:
+      		 <input type=text placeholder="ex : Rennes" size=20 name=ville>
+      	</label>
+      </div>
     </div>
     
     <div class="row">
+      <div class="large-6 columns">
+      	<label>Surface:
+      		 <input type=text placeholder="ex : 100" size=20 name=area>
+      	</label>
+      </div>
+      <div class="large-6 columns">
+      	<label>@ip:
+      		 <input type=text placeholder="ex : 192.168.0.5" size=20 name=area>
+      	</label>
+      </div>
+    </div>
+     
+    <div class="row">
+      <div class="large-12 columns">
+      	<label>Id du proprio :
+      		 <input type=text placeholder="ex : 2" size=2 name=ipProp>
+      	</label>
+      </div>
+    </div>   
+    
+   	<div class="row">
 	    <div class="large-12 columns">
 	    	<input type=submit value=Send class="button">
 	    </div>
 	</div>
-	
-    
-    </form>
+   	</form>
     
     <script src="foundation-5/js/vendor/jquery.js"></script>
     <script src="foundation-5/js/foundation.min.js"></script>
