@@ -23,7 +23,7 @@ TP testé avec Eclipse Java EE et une base de données MySQL.
 
 **API** 
 -----------
-Le path best /rest/hello
+Le path de base configuré dans Jersey **/rest/hello**
 
 | Method     | URL | Action   |
 | :------- | ----: | :---: |
