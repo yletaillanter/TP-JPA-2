@@ -4,10 +4,10 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("Heater")
-public class Heater extends SmartDevice  {
+@DiscriminatorValue("ElectronicDevice")
+public class ElectronicDevice extends SmartDevice {
 
-	public Heater(int conso, Home home) {
+	public ElectronicDevice(int conso, Home home) {
 		super(conso, home);
 		// TODO Auto-generated constructor stub
 	}

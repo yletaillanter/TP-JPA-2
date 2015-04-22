@@ -21,6 +21,11 @@ public abstract class SmartDevice implements Serializable {
 	private Long id;
 	private int conso;
 	private Home home;
+	
+	public SmartDevice(int conso, Home home){
+		this.conso = conso;
+		this.home = home;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

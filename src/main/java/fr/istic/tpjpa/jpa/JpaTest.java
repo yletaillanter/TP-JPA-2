@@ -18,6 +18,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import fr.istic.tpjpa.domain.ElectronicDevice;
 import fr.istic.tpjpa.domain.SmartDevice;
 import fr.istic.tpjpa.domain.Gender;
 import fr.istic.tpjpa.domain.Heater;
@@ -45,51 +46,70 @@ public class JpaTest {
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
 		
-		// CREATE ENTITY
-		Person yoann = new Person("Le Taillanter","Yoann",Gender.male,new Date());
+		// Creation des personnes
+		List<Person> persons = new ArrayList<Person>();
+		Person yoann = new Person("Le Taillanter","Yoann",Gender.male,new Date()); 
+		persons.add(yoann);
 		Person faustine = new Person("Beaumont","Faustine",Gender.female,new Date());
+		persons.add(faustine);
 		Person person1 = new Person("Forrest","Fry",Gender.male,new Date());
+		persons.add(person1);
 		Person person2 = new Person("Sebastian","Hahn",Gender.male,new Date());
+		persons.add(person2);
 		Person person3 = new Person("Todd","Baird",Gender.male,new Date());
+		persons.add(person3);
 		Person person4 = new Person("Beck","Aguirre",Gender.female,new Date());
+		persons.add(person4);
 		Person person5 = new Person("Herrod","Mueller",Gender.female,new Date());
+		persons.add(person5);
 		
-		yoann.setFriends(new ArrayList<Person>(Arrays.asList(faustine)));
+		// Liste d'amis
+		yoann.setFriends(new ArrayList<Person>(Arrays.asList(faustine,person1,person2)));
+		faustine.setFriends(new ArrayList<Person>(Arrays.asList(yoann,person2,person3,person4)));
+		person1.setFriends(new ArrayList<Person>(Arrays.asList(yoann)));
+		person2.setFriends(new ArrayList<Person>(Arrays.asList(faustine,person4,person5)));
+		person3.setFriends(new ArrayList<Person>(Arrays.asList(person4)));
+		person4.setFriends(new ArrayList<Person>(Arrays.asList(person3,person5)));
+		person5.setFriends(new ArrayList<Person>(Arrays.asList(person4)));
+
 		
-		Home yoannHome = new Home(
-				new Address(1,"rue des peupliers", 35700, "Rennes"),
-				100,
-				"192.168.0.10",
-				yoann);
+		// Ajout des maisons
+		Home home;
+		Person person;
+		List homes = new ArrayList<Home>();
+		for (int i = 0; i<7;i++){
+			home = new Home(
+					new Address(i,"Avenue du General Leclerc", 35700, "Rennes"),
+					100,
+					"192.168.0.10",
+					persons.get(i)
+			);
+			homes.add(home);
+		}
 		
-		Home yoannHome2 = new Home(
-				new Address(2,"Avenue du General Leclerc", 35000, "Rennes"),
-				100,
-				"127.0.0.0",
-				yoann);
-		
-		Home faustineHome1 = new Home(
-				new Address(100,"Chemin de la matauderie", 86000, "Poitiers"),
-				100,
-				"172.168.100.0",
-				faustine);
-		
-		SmartDevice chauffage = new Heater();
-		chauffage.setConso(1000);
-		chauffage.setHome(yoannHome);
-		yoannHome.setDevices(new ArrayList<SmartDevice>(Arrays.asList(chauffage)));
+		//Creation des devices
+		SmartDevice chauffage;
+		SmartDevice tv;
+		Home h;
+		for (int i = 0; i<7;i++){
+			chauffage = new Heater(2000,(Home)homes.get(i));
+			tv = new ElectronicDevice(50,(Home)homes.get(i));
+			h = (Home) homes.get(i);
+			h.setDevices(new ArrayList<SmartDevice>(Arrays.asList(chauffage,tv)));
+		}
 		
 		// PERSIST ENTITY
-		manager.persist(yoannHome);
-		manager.persist(yoannHome2);
-		manager.persist(faustineHome1);
-		manager.persist(person1);
-		manager.persist(person2);
-		manager.persist(person3);
-		manager.persist(person4);
-		manager.persist(person5);
+		for (int i = 0; i<7;i++){
+			h = (Home) homes.get(i);
+			manager.persist(h);
+		}
 		
-		manager.persist(yoann);
+		Person p;
+		for (int i = 0; i<7;i++){
+			p = (Person) persons.get(i);
+			manager.persist(p);
+		}
+
 		tx.commit();
 
 		// RUN REQUEST
