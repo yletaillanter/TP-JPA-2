@@ -44,7 +44,13 @@ public class Users extends HttpServlet {
 
         pw.println(header);
         for(Person pers : resultList){
-        	pw.println("<tr><td>"+pers.toString()+"</td></tr>");            
+        	pw.println("<tr>");
+        	pw.println("<td>"+pers.getFirstName()+"</td>");
+        	pw.println("<td>"+pers.getName()+"</td>");
+        	pw.println("<td>"+pers.getGender()+"</td>");
+        	pw.println("<td>"+pers.getEmail()+"</td>");
+        	pw.println("<td>"+pers.getFacebookProfil()+"</td>");
+        	pw.println("</tr>");        	
         }
         pw.println(footer);
         tx.commit();
@@ -76,12 +82,12 @@ public class Users extends HttpServlet {
 		+"<section class='top-bar-section'>"
 		+"<!-- Left Nav Section -->"
 		    +"<ul class='left'>"
-		      +"<li><a href='#'>Accueil</a></li>"
-		      +"<li class='has-dropdown'>"
+		      +"<li><a href='http://localhost:8080/'>Accueil</a></li>"
+		      +"<li class='has-dropdown active'>"
 		        +"<a href='#'>Personnes</a>"
 		        +"<ul class='dropdown'>"
 		          +"<li class='active'><a href='http://localhost:8080/Users'>Voir les personnes</a></li>"
-		          +"<li><a href='#'>Ajouter une personne</a></li>"
+		          +"<li><a href='http://localhost:8080/ajoutperson.html'>Ajouter une personne</a></li>"
 		        +"</ul>"
 		      +"</li>"
 		      +"<li class='has-dropdown'>"
@@ -94,7 +100,7 @@ public class Users extends HttpServlet {
 		    +"</ul>"
 		    +"</section>"
 			+"</nav>"	
-		    +"<table> <thead> <tr> <th width='200'>Personnes</th> </tr> </thead> <tbody>";
+		    +"<table> <thead> <tr> <th>Nom</th> <th>Prenom</th> <th>Genre</th> <th >Email</th> <th >Facebook profil</th> </tr> </thead> <tbody>";
     
     String footer = "</tbody> </thead> </table>"
     			    
@@ -105,5 +111,4 @@ public class Users extends HttpServlet {
 		    +"</script>"
 		  +"</body>"
 		+"</html>";
-    
 }

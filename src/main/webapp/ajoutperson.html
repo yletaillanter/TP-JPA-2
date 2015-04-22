@@ -1,20 +1,89 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    <H3>Create a new Person!</H3>
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Poweoo | Welcome</title>
+    <link rel="stylesheet" href="foundation-5/css/foundation.css" />
+    <script src="foundation-5/js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+  
+  <nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">Poweoo</a></h1>
+    </li>
+  </ul>
 
-    <FORM method="POST" Action="/AddPerson">
-        First name: <INPUT type=text size=20 name=firstName> <BR>
-        Last name: <INPUT type=text size=20 name=lastName> <BR>
-        <INPUT type="radio" name="gender" value="M"> Male<br>
-		<INPUT type="radio" name="gender" value="F"> Female<br>
-        Email: <INPUT type=text size=20 name=email> <BR>
-
-        <INPUT type=submit value=Send> <BR>
-    </FORM>
-</body>
+  <section class="top-bar-section">
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><a href="http://localhost:8080/">Accueil</a></li>
+      <li class="has-dropdown active">
+        <a href="#">Personnes</a>
+        <ul class="dropdown">
+          <li><a href="http://localhost:8080/Users">Voir les personnes</a></li>
+          <li  class="active"><a href="http://localhost:8080/ajoutperson.html">Ajouter une personne</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="#">Maisons</a>
+        <ul class="dropdown">
+          <li><a href="http://localhost:8080/Homes">Voir les maisons</a></li>
+          <li><a href="#">Ajouter une maison</a></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</nav>
+    
+    <!-- Formulaire ajout d'une personne -->
+    <form method="POST" Action="/AddPerson">
+    <div class="row">
+      <div class="large-12 columns">
+      	<label>First name:
+      		 <input type=text placeholder="First name" size=20 name=firstName>
+      	</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+      	<label>Last name:
+      		 <input type=text placeholder="Last name" size=20 name=lastName>
+      	</label>
+      </div>
+    </div>
+      
+    <div class="row">
+      <div class="large-12 columns">
+      	<label>Email :
+      		 <input type=text placeholder="email" size=20 name=email>
+      	</label>
+      </div>
+    </div>
+    
+    <div class="row">
+	    <div class="large-12 columns">
+	      <label>Gender</label>
+	      <input type="radio" name="gender" value="M"><label>Male</label>
+	      <input type="radio" name="gender" value="F"><label>Female</label>
+	    </div>
+    </div>
+    
+    <div class="row">
+	    <div class="large-12 columns">
+	    	<input type=submit value=Send class="button">
+	    </div>
+	</div>
+	
+    
+    </form>
+    
+    <script src="foundation-5/js/vendor/jquery.js"></script>
+    <script src="foundation-5/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
 </html>
