@@ -5,7 +5,7 @@ Bienvenue sur le TP JPA
 
 Baptiste Quéré & Yoann Le Taillanter.
 
-TP testé avec Eclipse Java EE avec une base de données MySQL.
+TP testé avec Eclipse Java EE et une base de données MySQL.
 
  <i class="icon-cog"></i>**Configuration**
 -------------------------
