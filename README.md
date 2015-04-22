@@ -7,6 +7,10 @@ Baptiste Quéré & Yoann Le Taillanter.
 
 TP testé avec Eclipse Java EE et une base de données MySQL.
 
+Ce TP comprend : 
+> Une partie Servlet
+> Una partie Web Service (Jersey), qui sert également de backend pour le TP Angular.
+
  <i class="icon-cog"></i>**Configuration**
 -------------------------
 
