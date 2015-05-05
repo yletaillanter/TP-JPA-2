@@ -25,6 +25,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -131,5 +132,22 @@ public class SampleWebService {
     	}
     	return jsonObj;
     }
+    
+    //Test object JSON param 
+    @POST
+	@Path("/insererpersonne")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void insertPerson(Person person){
+    	
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("example");
+		EntityManager manager = factory.createEntityManager();
+		EntityTransaction tx = manager.getTransaction();
+		
+		tx.begin();
+		manager.persist(person);		
+		tx.commit();
+		
+		//return Response.status(200).entity(true).build();
+	}
     
 }

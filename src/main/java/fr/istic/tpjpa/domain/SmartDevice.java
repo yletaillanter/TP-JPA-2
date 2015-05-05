@@ -22,10 +22,7 @@ public abstract class SmartDevice implements Serializable {
 	private int conso;
 	private Home home;
 	
-	public SmartDevice(int conso, Home home){
-		this.conso = conso;
-		this.home = home;
-	}
+	public SmartDevice(){}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -92,10 +92,15 @@ public class JpaTest {
 		SmartDevice tv;
 		Home h;
 		for (int i = 0; i<7;i++){
-			chauffage = new Heater(2000,(Home)homes.get(i));
-			tv = new ElectronicDevice(50,(Home)homes.get(i));
+			//chauffage = new Heater(2000,(Home)homes.get(i));
+			chauffage = new Heater();
+			tv = new ElectronicDevice();
 			h = (Home) homes.get(i);
-			h.setDevices(new ArrayList<SmartDevice>(Arrays.asList(chauffage,tv)));
+			chauffage.setHome(h);
+			tv.setHome(h);
+			chauffage.setConso(2000);
+			tv.setConso(60);
+			h.setDevices(new ArrayList<SmartDevice>(Arrays.asList(chauffage)));
 		}
 		
 		// PERSIST ENTITY
@@ -154,6 +159,7 @@ public class JpaTest {
 		}
 	}
 	
-	
+	//SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	//simpleDateFormat.parse("06/12/1965")
 	
 }

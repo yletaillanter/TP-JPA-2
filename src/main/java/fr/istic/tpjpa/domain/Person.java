@@ -12,12 +12,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 
 @Entity
@@ -119,8 +121,11 @@ public class Person implements Serializable {
 	}
 
 	@ManyToMany
-	@JoinTable(name="Friends")
-	@JsonManagedReference
+	@JoinTable(name="Friends", 
+		      joinColumns=@JoinColumn(name = "Person_id", referencedColumnName = "Id"),
+		              inverseJoinColumns =
+		                @JoinColumn(name = "friend_id", referencedColumnName = "Id"))
+	@JsonIgnore // Probleme de recursion
 	public List<Person> getFriends() {
 		return friends;
 	}
